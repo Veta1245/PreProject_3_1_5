@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
+import java.security.Principal;
+
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
@@ -21,16 +23,12 @@ public class AdminController {
     }
 
     @GetMapping
-    public String getAllUser(Model model) {
+    public String getAllUser(Model model, Principal principal) {
+        model.addAttribute("user", userService.findByUsername(principal.getName()));
         model.addAttribute("users", userService.listUsers());
         return "admin";
     }
 
-    @GetMapping("/new")
-    public String addNewUser(Model model) {
-        model.addAttribute("user", new User());
-        return "new";
-    }
 
     @PostMapping()
     public String saveNewUser(@ModelAttribute("user") User user, String role) {
@@ -39,15 +37,16 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @GetMapping("/edit")
-    public String edit(@RequestParam(value = "id") long id, Model model) {
-        model.addAttribute("user", userService.showUser(id));
-        return "edit";
+    @GetMapping("/{id}")
+    public String edit(@ModelAttribute("user") User user, @PathVariable("id") long id, String role) {
+        userService.updateUser(id, user);
+        userService.addRoleToUser(role, user);
+        return "redirect:/admin";
     }
 
 
-    @PostMapping("/delete")
-    public String deleteUser(@RequestParam(value = "id") long id) {
+    @PostMapping("/{id}")
+    public String deleteUser(@PathVariable("id") long id) {
         userService.deleteUser(id);
         return "redirect:/admin";
     }

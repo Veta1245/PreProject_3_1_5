@@ -31,10 +31,10 @@ public class DatabaseAuto implements CommandLineRunner {
         this.roleRepository.save(adminRole);
         this.roleRepository.save(userRole);
 
-        User admin = new User("Admin1", "Admin", "Adminovich", "admin@mail.ru", "root");
+        User admin = new User("Admin1", "Admin", "Adminovich", 12, "admin@mail.ru", "root");
         admin.setRoleList(new HashSet<>(List.of(adminRole, userRole)));
 
-        User user = new User("User1", "User", "Userovich", "user@mail.ru", "1234");
+        User user = new User("User1", "User", "Userovich", 11, "user@mail.ru", "1234");
         user.setRoleList(new HashSet<>(List.of(userRole)));
 
         this.userRepository.save(admin);

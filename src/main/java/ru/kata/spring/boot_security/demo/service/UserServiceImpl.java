@@ -53,6 +53,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         userRepository.deleteById(id);
     }
 
+    @Override
+    public void updateUser(Long id, User user) {
+        user.setId(id);
+        userRepository.save(user);
+    }
+
 
     @Override
     @Transactional(readOnly = true)

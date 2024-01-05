@@ -33,7 +33,9 @@ public class User implements UserDetails {
     private String name;
 
 
-    private String lastname;
+    private String lastName;
+
+    private int age;
 
     @Column(unique = true)
     private String email;
@@ -46,10 +48,11 @@ public class User implements UserDetails {
     @ToString.Exclude
     private Set<Role> roleList = new HashSet<>();
 
-    public User(String username, String name, String lastname, String email, String password) {
+    public User(String username, String name, String lastName, int age, String email, String password) {
         this.username = username;
         this.name = name;
-        this.lastname = lastname;
+        this.lastName = lastName;
+        this.age = age;
         this.email = email;
         this.password = password;
     }
