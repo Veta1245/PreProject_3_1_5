@@ -45,7 +45,11 @@ public class User implements UserDetails {
 
 
     @ManyToMany
-    @ToString.Exclude
+    @JoinTable(
+            name = "user_role",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
     private Set<Role> roleList = new HashSet<>();
 
     public User(String username, String name, String lastName, int age, String email, String password) {

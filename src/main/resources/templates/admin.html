@@ -20,6 +20,7 @@
             flex: 1;
             overflow-y: auto;
         }
+
     </style>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
           rel="stylesheet"
@@ -159,7 +160,6 @@
                                                                         <input type="text"
                                                                                th:value="${user.id}" name="idUser"
                                                                                class="form-control" id="idUpdate"
-                                                                               required minlength="2" maxlength="15"
                                                                                style="height: 30px; width: 300px; margin: 0 auto"/>
                                                                     </div>
 
@@ -171,7 +171,6 @@
                                                                                th:value="${user.username}"
                                                                                name="username"
                                                                                class="form-control" id="usernameUpdate"
-                                                                               required minlength="2" maxlength="15"
                                                                                style="height: 30px; width: 300px; margin: 0 auto"/>
                                                                     </div>
 
@@ -183,7 +182,6 @@
                                                                             <input type="text"
                                                                                    th:value="${user.name}" name="name"
                                                                                    class="form-control" id="nameUpdate"
-                                                                                   required minlength="2" maxlength="15"
                                                                                    style="height: 30px; width: 300px; margin: 0 auto"/>
                                                                         </div>
 
@@ -196,7 +194,6 @@
                                                                                    name="lastName"
                                                                                    class="form-control"
                                                                                    id="lastNameUpdate"
-                                                                                   required minlength="2" maxlength="15"
                                                                                    style="height: 30px; width: 300px; margin: 0 auto"/>
                                                                         </div>
 
@@ -206,8 +203,6 @@
                                                                             </p></label>
                                                                             <input class="form-control" type="number"
                                                                                    step="1" min="0"
-                                                                                   required minlength="1"
-                                                                                   maxlength="120"
                                                                                    th:value="${user.age}" name="age"
                                                                                    id="ageUpdate"
                                                                                    style="height: 30px; width: 300px; margin: 0 auto"/>
@@ -219,7 +214,6 @@
                                                                             <input type="text"
                                                                                    th:value="${user.email}" name="email"
                                                                                    class="form-control" id="emailUpdate"
-                                                                                   required minlength="2" maxlength="15"
                                                                                    style="height: 30px; width: 300px; margin: 0 auto"/>
                                                                         </div>
 
@@ -227,25 +221,24 @@
                                                                             <label for="passwordUpdate"
                                                                                    class="col-form-label"><p>
                                                                                 <b>Password</b></p></label>
-                                                                            <input type="password"
+                                                                            <input type="text"
                                                                                    th:value="${user.password}"
                                                                                    name="password"
                                                                                    class="form-control"
                                                                                    id="passwordUpdate"
-                                                                                   required minlength="2" maxlength="15"
                                                                                    style="height: 30px; width: 300px; margin: 0 auto"/>
                                                                         </div>
 
                                                                         <div class="card-body text-center">
 
-                                                                            <label class="container-fluid "><p>
-                                                                                <b>Role</b></p>
-                                                                                <select name="role" multiple="multiple"
-                                                                                        required
+                                                                            <label class="container-fluid">Role</label>
+                                                                            <label>
+                                                                                <select th:field="*{roleList}"
+                                                                                        multiple="multiple"
                                                                                         style="height: 45px; width: 300px; margin: 0 auto">
-                                                                                    <option value="ROLE_ADMIN">ADMIN
-                                                                                    </option>
-                                                                                    <option value="ROLE_USER">USER
+                                                                                    <option th:each="role : ${allRoles}"
+                                                                                            th:value="${role.id}"
+                                                                                            th:text="${role.name}">
                                                                                     </option>
                                                                                 </select>
                                                                             </label>
@@ -296,7 +289,6 @@
                                                                                    th:value="${user.id}" name="idUser"
                                                                                    class="form-control" id="idDelete"
                                                                                    readonly
-                                                                                   required minlength="2" maxlength="15"
                                                                                    style="height: 30px; width: 300px;  margin: 0 auto"/>
                                                                         </div>
                                                                         <div class="card-body text-center">
@@ -308,7 +300,6 @@
                                                                                    name="username"
                                                                                    class="form-control"
                                                                                    id="usernameDelete" readonly
-                                                                                   required minlength="2" maxlength="15"
                                                                                    style="height: 30px; width: 300px; margin: 0 auto"/>
                                                                         </div>
 
@@ -322,8 +313,6 @@
                                                                                        name="name"
                                                                                        class="form-control"
                                                                                        id="nameDelete" readonly
-                                                                                       required minlength="2"
-                                                                                       maxlength="15"
                                                                                        style="height: 30px; width: 300px; margin: 0 auto"/>
                                                                             </div>
                                                                             <div class="card-body text-center">
@@ -335,8 +324,6 @@
                                                                                        name="lastName"
                                                                                        class="form-control"
                                                                                        id="lastNameDelete" readonly
-                                                                                       required minlength="2"
-                                                                                       maxlength="15"
                                                                                        style="height: 30px; width: 300px; margin: 0 auto"/>
                                                                             </div>
                                                                             <div class="card-body text-center">
@@ -347,8 +334,6 @@
                                                                                        th:value="${user.age}" name="age"
                                                                                        class="form-control"
                                                                                        id="ageDelete" readonly
-                                                                                       required minlength="2"
-                                                                                       maxlength="15"
                                                                                        style="height: 30px; width: 300px; margin: 0 auto"/>
                                                                             </div>
                                                                             <div class="card-body text-center">
@@ -360,10 +345,9 @@
                                                                                        name="email"
                                                                                        class="form-control"
                                                                                        id="emailDelete" readonly
-                                                                                       required minlength="2"
-                                                                                       maxlength="15"
                                                                                        style="height: 30px; width: 300px; margin: 0 auto"/>
                                                                             </div>
+
                                                                             <div class="card-body text-center">
 
                                                                                 <label class="container-fluid "><p><b>Role</b>
@@ -373,8 +357,6 @@
                                                                                            name="role"
                                                                                            class="form-control"
                                                                                            id="roleDelete" readonly
-                                                                                           required minlength="2"
-                                                                                           maxlength="15"
                                                                                            style="height: 30px; width: 300px; margin: 0 auto"/>
                                                                                 </label>
                                                                             </div>
@@ -410,8 +392,7 @@
                                                 <label class="font-weight-bold" for="usernameNew"><p><b>User name</b>
                                                 </p></label>
                                                 <br>
-                                                <input class="form-control" type="text" required minlength="2"
-                                                       maxlength="15"
+                                                <input class="form-control" type="text"
                                                        name="username"
                                                        id="usernameNew"
                                                        style="height: 30px; width: 300px; margin: 0 auto"
@@ -420,8 +401,7 @@
                                                 <label class="font-weight-bold" for="firstNameNew"><p><b>Name</b></p>
                                                 </label>
                                                 <br>
-                                                <input class="form-control" type="text" required minlength="2"
-                                                       maxlength="15"
+                                                <input class="form-control" type="text"
                                                        name="name"
                                                        id="firstNameNew"
                                                        style="height: 30px; width: 300px; margin: 0 auto"
@@ -430,8 +410,7 @@
                                                 <label class="font-weight-bold" for="lastNameNew"><p><b>Last Name</b>
                                                 </p></label>
                                                 <br>
-                                                <input class="form-control" type="text" required minlength="2"
-                                                       maxlength="15"
+                                                <input class="form-control" type="text"
                                                        name="lastName"
                                                        id="lastNameNew"
                                                        style="height: 30px; width: 300px; margin: 0 auto"
@@ -439,17 +418,14 @@
                                                 <br>
                                                 <label class="font-weight-bold" for="ageNew"><p><b>Age</b></p></label>
                                                 <br>
-                                                <input class="form-control" type="number" step="1" min="0" required
-                                                       minlength="1" maxlength="120" name="age"
+                                                <input class="form-control" type="number" value=0 name="age"
                                                        id="ageNew" style="height: 30px; width: 300px; margin: 0 auto"
                                                        placeholder="Age"/>
                                                 <br>
                                                 <label class="font-weight-bold" for="emailNew"><p><b>Email</b></p>
                                                 </label>
                                                 <br>
-                                                <input class="form-control" type="text" step="1" min="0" required
-                                                       minlength="1"
-                                                       maxlength="120" name="email"
+                                                <input class="form-control" type="text" name="email"
                                                        id="emailNew"
                                                        style="height: 30px; width: 300px; margin: 0 auto"
                                                        placeholder="email"/>
@@ -457,8 +433,7 @@
                                                 <label class="font-weight-bold" for="passwordNew"><p><b>Password</b></p>
                                                 </label>
                                                 <br>
-                                                <input class="form-control" type="text" required minlength="3"
-                                                       maxlength="15"
+                                                <input class="form-control" type="text"
                                                        name="password"
                                                        id="passwordNew"
                                                        style="height: 30px; width: 300px; margin: 0 auto"
@@ -467,11 +442,13 @@
                                                 <label class="font-weight-bold"><p><b>Role</b></p></label>
                                                 <br/>
                                                 <div class="mb-3">
-                                                    <label class="container-fluid ">
-                                                        <select name="role" multiple="multiple" required
+                                                    <label class="container-fluid">Role</label>
+                                                    <label>
+                                                        <select th:field="*{roleList}" multiple="multiple"
                                                                 style="height: 45px; width: 300px; margin: 0 auto">
-                                                            <option value="ROLE_ADMIN">ADMIN</option>
-                                                            <option value="ROLE_USER">USER</option>
+                                                            <option th:each="role : ${allRoles}" th:value="${role.id}"
+                                                                    th:text="${role.name}">
+                                                            </option>
                                                         </select>
                                                     </label>
                                                 </div>
