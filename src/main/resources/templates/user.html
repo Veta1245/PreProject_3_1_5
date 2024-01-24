@@ -3,88 +3,86 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Admin panel</title>
-    <style>
-        .table {
-            flex: 1;
-            overflow-y: auto;
-        }
-    </style>
+    <title>User Panel</title>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
           rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
           crossorigin="anonymous">
 </head>
+<style>
+    #headerPageUser {
+        margin-left: 0px;
+    }
+
+    #v-pills-tab {
+        border-radius: 5px;
+    }
+
+    #v-pills-user-tab {
+        outline: none;
+    }
+</style>
+
 <body>
 
-<!--заголовок-->
-<div class="d-flex flex-column vh-100">
-    <div class="row no-gutters">
-        <div class="col-12">
-            <nav class="navbar navbar-dark bg-dark">
-                <div style="color: white; font-size: 24px">
-                    <b th:text="${user.email}">Почта</b>
-                    with roles:
-                    <span th:each="role : ${user.roleList}">
-                                <span th:text="${role.name.substring(5)}"></span>
-                            </span>
-                </div>
-                <form th:action="@{/logout}" th:method="POST">
-                    <input class="btn" type="submit" value="Logout" style="color: darkgrey"
-                           onmouseover="this.style.color='white'" onmouseout="this.style.color='darkgrey'">
-                </form>
-            </nav>
+<!--Шапка сайта-->
 
-            <div class="container-fluid">
-                <div class="row">
+<header>
+    <nav class="navbar navbar-dark bg-dark mb-3">
+    <span class="navbar-brand" id="headerPageUser">
+    </span>
+        <form th:action="@{/logout}" th:method="POST">
+            <button type="submit" class="btn btn-outline-dark" style="color: lightgrey">Logout</button>
+        </form>
+    </nav>
+</header>
 
-                    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-                        <div class="position-sticky pt-3">
-                            <ul class="nav nav-pills flex-column">
-                                <li class="nav-item">
-                                    <a class="nav-link active " href="/user">
-                                        User
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </nav>
+<!-------------------------------------------------------------------------------------------------->
+<!--user сбоку панель-->
 
-                    <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
-                        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                            <h1 class="h2">User information-page </h1>
-                        </div>
-                        <div>
-                            <h4>About user</h4>
-                            <br>
-                            <div class="table-responsive">
-                                <table class="table table-striped table-sm">
-                                    <thead>
-                                    <tr>
-                                        <th>name</th>
-                                        <th>lastname</th>
-                                        <th>age</th>
-                                        <th>email</th>
-                                        <th>roles</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td><p th:text="${user.name}"></p></td>
-                                        <td><p th:text="${user.lastName}"></p></td>
-                                        <td><p th:text="${user.age}"></td>
-                                        <td><p th:text="${user.email}"></td>
-                                        <td><p th:text="${user.roleList}"></td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </main>
-                </div>
+<div class="d-flex align-items-start">
+    <div class="col-2">
+        <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+            <button class="nav-link active" id="v-pills-user-tab" data-bs-toggle="pill" data-bs-target="#v-pills-user"
+                    type="button" role="tab" aria-controls="v-pills-user" aria-selected="true">User
+            </button>
+        </div>
+    </div>
+
+    <!-------------------------------------------------------------------------------------------------->
+    <!--таблица user-->
+
+    <div class="col-10">
+        <div class="tab-content" id="v-pills-tabContent">
+            <div class="tab-pane fade show active" id="v-pills-user" role="tabpanel" aria-labelledby="v-pills-user-tab">
+                <h1 class="h2">User information-page </h1>
+                <h4>About user</h4>
+                <br>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Username</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Age</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tableUser">
+
+                    </tbody>
+                </table>
             </div>
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-                    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-                    crossorigin="anonymous"></script>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="/user.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </body>
 </html>

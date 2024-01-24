@@ -30,10 +30,10 @@ public class User implements UserDetails {
     private String username;
 
 
-    private String name;
+    private String firstname;
 
 
-    private String lastName;
+    private String lastname;
 
     private int age;
 
@@ -50,12 +50,12 @@ public class User implements UserDetails {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
-    private Set<Role> roleList = new HashSet<>();
+    private Set<Role> roles = new HashSet<>();
 
     public User(String username, String name, String lastName, int age, String email, String password) {
         this.username = username;
-        this.name = name;
-        this.lastName = lastName;
+        this.firstname = name;
+        this.lastname = lastName;
         this.age = age;
         this.email = email;
         this.password = password;
@@ -84,7 +84,7 @@ public class User implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
 
-        return roleList.stream().map(role -> new SimpleGrantedAuthority(role.getName()))
+        return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName()))
                 .collect(Collectors.toList());
     }
 
